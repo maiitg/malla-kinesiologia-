@@ -1,6 +1,6 @@
 body {
   font-family: Arial, sans-serif;
-  background: #ffffff;
+  background: #f7f9fb;
   margin: 0;
   padding: 20px;
 }
@@ -43,54 +43,11 @@ h1 {
   border-color: #3999d8;
   z-index: 1;
 }
-.materia.cb { background: #ccffcc; }   /* Ciencias Básicas */
-.materia.fg { background: #ffd9cc; }   /* Formación General */
-.materia.cf { background: #ffffcc; }   /* Comunes Facultad */
-.materia.pc { background: #f8f8ff; }   /* Propias de Carrera */
-.materia.el { background: #ccd9ff; }   /* Electivas */
-.prereq {
-  font-size: 10px;
-  color: #6a6a6a;
-  margin-top: 2px;
-}
-.detalle-oculto {
-  display: none;
-}
-#detalle {
-  position: fixed;
-  top: 30%;
-  left: 50%;
-  transform: translate(-50%, -20%);
-  background: #fff;
-  border: 2px solid #3999d8;
-  border-radius: 8px;
-  box-shadow: 0 0 20px #b7c6d6;
-  min-width: 300px;
-  max-width: 90vw;
-  padding: 28px 24px;
-  z-index: 100;
-}
-#detalle h2 {
-  margin-top: 0;
-}
-#detalle .close-btn {
-  position: absolute;
-  top: 8px;
-  right: 12px;
-  background: #3999d8;
-  color: #fff;
-  border: none;
-  border-radius: 50%;
-  width: 26px;
-  height: 26px;
-  font-size: 18px;
-  cursor: pointer;
-}
-@media (max-width: 700px) {
-  #malla { flex-wrap: wrap; justify-content: flex-start; }
-  .semestre { min-width: 140px; }
-  #detalle { min-width: 180px; }
-}
+.materia.cb { background: #ccffcc; }
+.materia.fg { background: #ffd9cc; }
+.materia.cf { background: #ffffcc; }
+.materia.pc { background: #f8f8ff; }
+.materia.el { background: #ccd9ff; }
 .materia.siguiente {
   border: 2px solid #3999d8;
   box-shadow: 0 0 12px #3999d8;
@@ -100,4 +57,8 @@ h1 {
 .materia.atenuada {
   opacity: 0.3;
   filter: grayscale(80%);
+}
+@media (max-width: 700px) {
+  #malla { flex-wrap: wrap; justify-content: flex-start; }
+  .semestre { min-width: 140px; }
 }
