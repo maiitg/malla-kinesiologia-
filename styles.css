@@ -46,7 +46,7 @@ h1 {
 .materia.cb { background: #ccffcc; }   /* Ciencias Básicas */
 .materia.fg { background: #ffd9cc; }   /* Formación General */
 .materia.cf { background: #ffffcc; }   /* Comunes Facultad */
-.materia.pc { background: #ffcccc; }   /* Propias de Carrera */
+.materia.pc { background: #f8f8ff; }   /* Propias de Carrera */
 .materia.el { background: #ccd9ff; }   /* Electivas */
 .prereq {
   font-size: 10px;
