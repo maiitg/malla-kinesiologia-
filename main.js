@@ -1,4 +1,3 @@
-// Quita el detalle y agrega la función de resaltar siguientes materias
 function renderMalla() {
   const cont = document.getElementById('malla');
   cont.innerHTML = "";
@@ -16,8 +15,11 @@ function renderMalla() {
       matDiv.className = "materia " + mat.tipo;
       matDiv.textContent = mat.nombre;
       matDiv.title = mat.nombre;
-      matDiv.dataset.codigo = mat.codigo; // para identificar luego
-      matDiv.onclick = () => resaltaSiguientes(mat.codigo);
+      matDiv.dataset.codigo = mat.codigo;
+      matDiv.onclick = (e) => {
+        e.stopPropagation(); // Prevent body click handler
+        resaltaSiguientes(mat.codigo);
+      };
       semDiv.appendChild(matDiv);
     });
     cont.appendChild(semDiv);
@@ -25,10 +27,8 @@ function renderMalla() {
 }
 
 function resaltaSiguientes(codigo) {
-  // Busca las materias siguientes
   const siguientes = MATERIAS.filter(m => m.prerrequisitos && m.prerrequisitos.includes(codigo)).map(m => m.codigo);
 
-  // Resalta las materias siguientes, atenúa las demás
   document.querySelectorAll('.materia').forEach(matDiv => {
     if (siguientes.includes(matDiv.dataset.codigo)) {
       matDiv.classList.add('siguiente');
@@ -39,7 +39,6 @@ function resaltaSiguientes(codigo) {
     }
   });
 
-  // Si no hay siguientes, atenúa todas menos la seleccionada
   if (siguientes.length === 0) {
     document.querySelectorAll('.materia').forEach(matDiv => {
       if (matDiv.dataset.codigo === codigo) {
@@ -53,9 +52,8 @@ function resaltaSiguientes(codigo) {
   }
 }
 
-// OPCIONAL: Al hacer clic afuera, restaurar la vista
+// Al hacer clic fuera, se restauran los estilos
 document.body.onclick = function(e) {
-  // Si no se hizo clic en una materia...
   if (!e.target.classList.contains('materia')) {
     document.querySelectorAll('.materia').forEach(matDiv => {
       matDiv.classList.remove('siguiente');
