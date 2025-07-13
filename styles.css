@@ -91,3 +91,13 @@ h1 {
   .semestre { min-width: 140px; }
   #detalle { min-width: 180px; }
 }
+.materia.siguiente {
+  border: 2px solid #3999d8;
+  box-shadow: 0 0 12px #3999d8;
+  opacity: 1;
+  font-weight: bold;
+}
+.materia.atenuada {
+  opacity: 0.3;
+  filter: grayscale(80%);
+}
