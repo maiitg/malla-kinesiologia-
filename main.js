@@ -1,3 +1,7 @@
+
+let tachados = new Set();
+let resaltados = new Set();
+
 function renderMalla() {
   const cont = document.getElementById('malla');
   cont.innerHTML = "";
@@ -16,9 +20,12 @@ function renderMalla() {
       matDiv.textContent = mat.nombre;
       matDiv.title = mat.nombre;
       matDiv.dataset.codigo = mat.codigo;
+      
+      if (tachados.has(mat.codigo)) matDiv.classList.add('tachada');
+      if (resaltados.has(mat.codigo)) matDiv.classList.add('siguiente');
       matDiv.onclick = (e) => {
-        e.stopPropagation(); // Prevent body click handler
-        resaltaSiguientes(mat.codigo);
+        e.stopPropagation();
+        marcarTacharYResaltar(mat.codigo);
       };
       semDiv.appendChild(matDiv);
     });
@@ -26,40 +33,13 @@ function renderMalla() {
   }
 }
 
-function resaltaSiguientes(codigo) {
+function marcarTacharYResaltar(codigo) {
+  tachados.add(codigo);
+
   const siguientes = MATERIAS.filter(m => m.prerrequisitos && m.prerrequisitos.includes(codigo)).map(m => m.codigo);
+  siguientes.forEach(sig => resaltados.add(sig));
 
-  document.querySelectorAll('.materia').forEach(matDiv => {
-    if (siguientes.includes(matDiv.dataset.codigo)) {
-      matDiv.classList.add('siguiente');
-      matDiv.classList.remove('atenuada');
-    } else {
-      matDiv.classList.remove('siguiente');
-      matDiv.classList.add('atenuada');
-    }
-  });
-
-  if (siguientes.length === 0) {
-    document.querySelectorAll('.materia').forEach(matDiv => {
-      if (matDiv.dataset.codigo === codigo) {
-        matDiv.classList.add('siguiente');
-        matDiv.classList.remove('atenuada');
-      } else {
-        matDiv.classList.remove('siguiente');
-        matDiv.classList.add('atenuada');
-      }
-    });
-  }
+  renderMalla();
 }
-
-// Al hacer clic fuera, se restauran los estilos
-document.body.onclick = function(e) {
-  if (!e.target.classList.contains('materia')) {
-    document.querySelectorAll('.materia').forEach(matDiv => {
-      matDiv.classList.remove('siguiente');
-      matDiv.classList.remove('atenuada');
-    });
-  }
-};
 
 window.onload = renderMalla;
